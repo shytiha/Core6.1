@@ -1,14 +1,9 @@
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import java.util.stream.Stream;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
 public class MainTest {
     Main main;
 
@@ -40,9 +35,17 @@ public class MainTest {
         int a = 600, b = 0, expected = 36;
         var main = new Main();
         var result = main.tax6(600, 0);
-        if (result != expected) {
-            throw new RuntimeException("Что-то пошло не так");
-        }
+        Assertions.assertEquals(expected, result);
+
+    }
+
+    @Test
+    public void sum() {
+        int a = 5, b = 3, expected = 8;
+        var main = new Main();
+        var result = main.sum(5, 3);
+        Assertions.assertEquals(expected, result);
+
     }
 
     @MethodSource("methodSourse")
@@ -50,9 +53,7 @@ public class MainTest {
     public void parameterizedTax15Test(int a, int b, int expected) {
 
         var result = main.tax15(a, b);
-        if (result != expected) {
-            throw new RuntimeException("Что-то пошло не так");
-        }
+        Assertions.assertEquals(expected, result);
     }
 
     public static Stream<Arguments> methodSourse() {
